@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_lancer/views/home.dart';
+import 'package:local_lancer/views/taskjob.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +15,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: Home(),
+      //home: Home(),
+      routes: {
+        '/': (BuildContext context)=>Home(),
+        '/taskjob': (BuildContext context)=>Taskjob()
+      },
     );
   }
 }

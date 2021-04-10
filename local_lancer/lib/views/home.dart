@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_lancer/views/signup.dart';
+import 'package:local_lancer/views/taskjob.dart';
 
 class Home extends StatefulWidget {
   Home({this.app});
@@ -13,12 +14,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final loginDatabase=FirebaseDatabase.instance;
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    final log=loginDatabase.reference();
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title:Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -79,14 +82,15 @@ class _HomeState extends State<Home> {
                   child: Container(
                     color: Color(0xfff5f5f5),
                     child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
+                      controller: userNameController,
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'SFUIDisplay'
                       ),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Email',
+                        labelText: 'Username',
                         prefixIcon: Icon(Icons.person_outline),
                         labelStyle: TextStyle(
                           fontSize: 15
@@ -99,6 +103,7 @@ class _HomeState extends State<Home> {
                   color: Color(0xfff5f5f5),
                   child: TextFormField(
                     obscureText: true,
+                    controller: passwordController,
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'SFUIDisplay'
@@ -116,7 +121,47 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: EdgeInsets.only(top: 20),
                   child: MaterialButton(
-                    onPressed: (){},//since this is only a UI app
+                    onPressed: (){
+                      FocusScope.of(context).unfocus();
+                      final dbRefUser = FirebaseDatabase.instance.reference().child("User");
+                      dbRefUser.once().then((DataSnapshot snapshot){
+                        print('Data : ${snapshot.value}');
+                        print(snapshot.value.toString().contains(userNameController.text));
+                        if(snapshot.value.toString().contains(userNameController.text)){
+                          Map<dynamic, dynamic> values=snapshot.value;
+                            if(values[userNameController.text]["password"]==passwordController.text){
+                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context)=>Taskjob(uName: userNameController.text,))
+                              );
+                            }
+                            else{
+                              _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  content: Text("Wrong Password!"),
+                                  duration: Duration(seconds:1),
+                                )
+                              );
+                              FocusScope.of(context).unfocus();
+                            }
+                          }
+                        else{
+                          _scaffoldKey.currentState.showSnackBar(
+                              SnackBar(
+                                content: Text("Username Not Found! Try Sign Up!"),
+                                duration: Duration(seconds:1),
+                              )
+                            );
+                            FocusScope.of(context).unfocus();
+                          /*Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context)=>Sign())
+                          );*/
+                        }
+                      });
+                    },//since this is only a UI app
                     child: Text('SIGN IN',
                     style: TextStyle(
                       fontSize: 15,
@@ -148,6 +193,7 @@ class _HomeState extends State<Home> {
                 ),*/
                 GestureDetector(
                     onTap: (){
+                      Navigator.pop(context);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context)=>Sign())
