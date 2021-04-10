@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "234355263130",
+    "project_id": "locallancer-38c6c",
+    "storage_bucket": "locallancer-38c6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234355263130:android:032333e3c9c2df912b0123",
+        "android_client_info": {
+          "package_name": "com.example.local_lancer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234355263130-krih822vi6d20054ec8vgp4fqj2oak3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnpaHHYmt_BCgTAmW3slgA358SHI_thdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234355263130-krih822vi6d20054ec8vgp4fqj2oak3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
