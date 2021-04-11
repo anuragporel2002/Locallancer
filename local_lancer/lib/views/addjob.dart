@@ -40,7 +40,7 @@ class _AddjobState extends State<Addjob> {
                     color: Color(0xfff5f5f5),
                     borderRadius: BorderRadius.circular(6),
                   image: DecorationImage(
-                  image: AssetImage('Assets/image1.jpg'),
+                  image: AssetImage('Assets/image2.jpeg'),
                   fit: BoxFit.fitWidth,
                   alignment: Alignment.topCenter
                 )
@@ -52,7 +52,7 @@ class _AddjobState extends State<Addjob> {
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          margin: EdgeInsets.only(top: 260),
+          margin: EdgeInsets.only(top: 240),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(0),
             color: Colors.white,
