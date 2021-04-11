@@ -40,7 +40,7 @@ class _AddjobState extends State<Addjob> {
                     color: Color(0xfff5f5f5),
                     borderRadius: BorderRadius.circular(6),
                   image: DecorationImage(
-                  image: AssetImage('Assets/image2.jpeg'),
+                  image: AssetImage('Assets/image2.jpg'),
                   fit: BoxFit.fitWidth,
                   alignment: Alignment.topCenter
                 )
